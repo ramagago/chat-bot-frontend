@@ -10,7 +10,7 @@ const Login = () => {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    const success = await authService.login("rama@example.com", "password");
+    const success = await authService.login(email, password);
     console.log("Resultado del fetch ", success);
     if (success) navigate("/chat-bot");
     else alert("Usuario o contraseña incorrectos");
