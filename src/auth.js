@@ -1,12 +1,13 @@
 import { API_URL } from "./config";
 
 class AuthService {
-  TOKEN_KEY = "TOKEN_KEY";
+  AUTH_DETAILS = "AUTH_DETAILS";
   authDetails;
 
-  //   constructor() {
-  //     this.token = localStorage.getItem(this.TOKEN_KEY);
-  //   }
+  constructor() {
+    this.authDetails = JSON.parse(localStorage.getItem(this.AUTH_DETAILS));
+    console.log(this.authDetails);
+  }
 
   async login(email, password) {
     try {
@@ -45,6 +46,11 @@ class AuthService {
       expiry: this.authDetails.expiry,
       uid: this.authDetails.uid,
     };
+  }
+
+  logOut() {
+    this.authDetails = null;
+    localStorage.removeItem(this.AUTH_DETAILS);
   }
 }
 

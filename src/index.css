@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+$primary-color: red;
+@import 'loaders.css/src/animations/ball-beat.scss'
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+    height: 5rem;
+  display: block;
+}
