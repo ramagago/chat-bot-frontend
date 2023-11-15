@@ -3,6 +3,7 @@ import { useQuestion } from "./hooks/useQuestions";
 import { useScrollList } from "./hooks/useScrollList";
 import { useRef } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { useCheckAuth } from "./hooks/useCheckAuth";
 
 // {
 //   getResponse: async (question) =>
@@ -45,6 +46,8 @@ const ChatBot = () => {
   const listRef = useRef();
 
   useScrollList(listRef, questionsAnswers);
+
+  useCheckAuth();
 
   const handleQuestion = (e) => {
     e.preventDefault();
@@ -92,7 +95,6 @@ const ChatBot = () => {
               placeholder="Ask a question"
               className="w-2/3 px-3 rounded-lg"
             />
-            {/* <input type="submit" value="Send" /> */}
             <button
               type="submit"
               className="m-3 text-white text-2xl hover:text-slate-400"
