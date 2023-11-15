@@ -4,11 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 
 function App() {
-  // const handleLogout = () => {
-  //   authService.logout();
-  //   Location. ("/");
-  // };
-
   return (
     <div className="flex flex-col">
       <Header />
