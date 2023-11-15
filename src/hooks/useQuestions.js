@@ -52,7 +52,7 @@ export const useQuestion = () => {
         setLoading(false);
       }
     },
-    [currentQA, loading]
+    [currentQA, loading],
   );
 
   const questionsAnswers = [...prevQA];

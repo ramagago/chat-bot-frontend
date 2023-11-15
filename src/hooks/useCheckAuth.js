@@ -6,10 +6,6 @@ export const useCheckAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const headers = authService.isAuthenticated();
-
-    if (!headers) {
-      navigate("/login");
-    }
+    !authService.isAuthenticated() && navigate("/login");
   }, [navigate]);
 };

@@ -3,7 +3,7 @@ import authService from "./auth";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
 

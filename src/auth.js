@@ -37,12 +37,13 @@ class AuthService {
     this.authDetails = { token, client, uid, expiry };
     localStorage.setItem(this.AUTH_DETAILS, JSON.stringify(this.authDetails));
   }
+
   getAuthHeader() {
     return {
       "access-token": this.authDetails?.token,
-      client: this.authDetails.client,
-      expiry: this.authDetails.expiry,
-      uid: this.authDetails.uid,
+      client: this.authDetails?.client,
+      expiry: this.authDetails?.expiry,
+      uid: this.authDetails?.uid,
     };
   }
 
@@ -52,7 +53,7 @@ class AuthService {
   }
 
   isAuthenticated() {
-    return this.authDetails !== null;
+    return !!this.authDetails?.token;
   }
 }
 
