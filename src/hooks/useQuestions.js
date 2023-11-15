@@ -1,37 +1,8 @@
 import { useState, useCallback } from "react";
 import { postQuestion } from "../questionService";
 
-const questionsAndAnswers = [
-  { question: "hola", answer: "hola, que quieres saber de tu pdf?" },
-  {
-    question: "que diría alejo en esta situación?",
-    answer: "nunca tengas un hijo negro",
-  },
-  { question: "por que diría eso?", answer: "ATENCIOOON" },
-  {
-    question: "en que anda peter?",
-    answer: "volando en parapente defiendiendo punta ballena",
-  },
-  {
-    question: "y nico?",
-    answer: "en us saveiro negra buscando la wave, zucundun zucundun",
-  },
-  {
-    question: "y rama?",
-    answer: "rezandole a todos los santos que lo contraten",
-  },
-  {
-    question: "cuando sale un asado?",
-    answer: "los proximos días lindos",
-  },
-  {
-    question: "donde compramos la carne",
-    answer: "en gorumeat",
-  },
-];
-
 export const useQuestion = () => {
-  const [prevQA, setPrevQA] = useState(questionsAndAnswers);
+  const [prevQA, setPrevQA] = useState([]);
   const [currentQA, setCurrentQA] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +23,7 @@ export const useQuestion = () => {
         setLoading(false);
       }
     },
-    [currentQA, loading]
+    [currentQA, loading],
   );
 
   const questionsAnswers = [...prevQA];

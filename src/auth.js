@@ -6,7 +6,6 @@ class AuthService {
 
   constructor() {
     this.authDetails = JSON.parse(localStorage.getItem(this.AUTH_DETAILS));
-    console.log(this.authDetails);
   }
 
   async login(email, password) {
@@ -35,22 +34,26 @@ class AuthService {
     const client = headers.get("Client");
     const uid = headers.get("Uid");
     const expiry = headers.get("Expiry");
-    const authDetails = { token, client, uid, expiry };
-    this.authDetails = authDetails;
-    localStorage.setItem(this.AUTH_DETAILS, JSON.stringify(authDetails));
+    this.authDetails = { token, client, uid, expiry };
+    localStorage.setItem(this.AUTH_DETAILS, JSON.stringify(this.authDetails));
   }
+
   getAuthHeader() {
     return {
-      "access-token": this.authDetails.token,
-      client: this.authDetails.client,
-      expiry: this.authDetails.expiry,
-      uid: this.authDetails.uid,
+      "access-token": this.authDetails?.token,
+      client: this.authDetails?.client,
+      expiry: this.authDetails?.expiry,
+      uid: this.authDetails?.uid,
     };
   }
 
   logOut() {
     this.authDetails = null;
     localStorage.removeItem(this.AUTH_DETAILS);
+  }
+
+  isAuthenticated() {
+    return !!this.authDetails?.token;
   }
 }
 

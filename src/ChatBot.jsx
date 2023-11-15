@@ -3,48 +3,15 @@ import { useQuestion } from "./hooks/useQuestions";
 import { useScrollList } from "./hooks/useScrollList";
 import { useRef } from "react";
 import { ThreeDots } from "react-loader-spinner";
-
-// {
-//   getResponse: async (question) =>
-//     new Promise((resolve) =>
-//       setTimeout(() => resolve(`Respuesta a la pregunta ${question}`), 500)
-//     ),
-// };
-
-// const questionsAndAnswers = [
-//   { question: "hola", answer: "hola, que quieres saber de tu pdf?" },
-//   {
-//     question: "que diría alejo en esta situación?",
-//     answer: "nunca tengas un hijo negro",
-//   },
-//   { question: "por que diría eso?", answer: "ATENCIOOON" },
-//   {
-//     question: "en que anda peter?",
-//     answer: "volando en parapente defiendiendo punta ballena",
-//   },
-//   {
-//     question: "y nico?",
-//     answer: "en us saveiro negra buscando la wave, zucundun zucundun",
-//   },
-//   {
-//     question: "y rama?",
-//     answer: "rezandole a todos los santos que lo contraten",
-//   },
-//   {
-//     question: "cuando sale un asado?",
-//     answer: "los proximos días lindos",
-//   },
-//   {
-//     question: "donde compramos la carne",
-//     answer: "en gorumeat",
-//   },
-// ];
+import { useCheckAuth } from "./hooks/useCheckAuth";
 
 const ChatBot = () => {
   const { newQuestion, questionsAnswers, loading } = useQuestion();
   const listRef = useRef();
 
   useScrollList(listRef, questionsAnswers);
+
+  useCheckAuth();
 
   const handleQuestion = (e) => {
     e.preventDefault();
@@ -92,7 +59,6 @@ const ChatBot = () => {
               placeholder="Ask a question"
               className="w-2/3 px-3 rounded-lg"
             />
-            {/* <input type="submit" value="Send" /> */}
             <button
               type="submit"
               className="m-3 text-white text-2xl hover:text-slate-400"
