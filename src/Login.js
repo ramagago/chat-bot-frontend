@@ -41,7 +41,7 @@ const Login = () => {
             value="Log in"
             className="px-5 py-2 rounded-md bg-slate-600 text-white"
           />
-        </div>{" "}
+        </div>
       </form>
     </div>
   );

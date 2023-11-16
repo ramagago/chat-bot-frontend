@@ -1,12 +1,15 @@
-import { MdSend } from "react-icons/md";
+import { MdSend, MdOutlineAddCircle } from "react-icons/md";
 import { useQuestion } from "./hooks/useQuestions";
 import { useScrollList } from "./hooks/useScrollList";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useCheckAuth } from "./hooks/useCheckAuth";
+import AddPdfModal from "./components/AddPdfModal";
 
 const ChatBot = () => {
   const { newQuestion, questionsAnswers, loading } = useQuestion();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const listRef = useRef();
 
   useScrollList(listRef, questionsAnswers);
@@ -18,6 +21,13 @@ const ChatBot = () => {
     const question = e.target.question.value;
     newQuestion(question);
     e.target.question.value = "";
+  };
+  const handleAddPdf = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -52,12 +62,15 @@ const ChatBot = () => {
               visible={loading}
             />
           }
-          <form onSubmit={handleQuestion} className="flex justify-center">
+          <form
+            onSubmit={handleQuestion}
+            className="flex justify-center items-center"
+          >
             <input
               type="text"
               name="question"
               placeholder="Ask a question"
-              className="w-2/3 px-3 rounded-lg"
+              className="w-2/3 h-12 px-3 rounded-lg text-sm"
             />
             <button
               type="submit"
@@ -65,9 +78,16 @@ const ChatBot = () => {
             >
               <MdSend />
             </button>
+            <button
+              onClick={handleAddPdf}
+              className="m-3 text-white text-4xl hover:text-slate-400"
+            >
+              <MdOutlineAddCircle />
+            </button>
           </form>
         </div>
       </div>
+      {isModalOpen && <AddPdfModal handleCloseModal={handleCloseModal} />}
     </>
   );
 };
