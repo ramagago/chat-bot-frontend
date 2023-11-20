@@ -1,15 +1,35 @@
-const AddPdfModal = (handleCloseModal) => {
-  const handleuploadPdf = (e) => {
+import PropTypes from "prop-types";
+import { API_URL } from "../config";
+
+const AddPdfModal = ({ handleCloseModal }) => {
+  const handleuploadPdf = async (e) => {
     e.preventDefault();
-    const title = e.target.title.value;
-    const description = e.target.description.value;
-    const file = e.target.file.files[0];
-    if (!file) return;
+
+    const titleValue = e.target.title.value;
+    const infoValue = e.target.info.value;
+    const fileValue = e.target.file.files[0] || null;
+    if (!fileValue) return;
+
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("file", file);
+    formData.append("title", titleValue);
+    formData.append("info", infoValue);
+    formData.append("file", fileValue);
     console.log(formData);
+
+    try {
+      const response = await fetch(`${API_URL}/uploadpdf`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log("se subio el pdf");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -33,13 +53,16 @@ const AddPdfModal = (handleCloseModal) => {
             placeholder="Title"
             className="w-64 h-7 rounded-md text-sm pl-1 mb-3"
           />
-          <input
-            type="text"
+          <textarea
             name="info"
             placeholder="Information"
             className="w-64 h-24 rounded-md text-sm pl-1 mb-7"
           />
-          <input type="file" className="text-xs mb-12 hover:cursor-pointer" />
+          <input
+            type="file"
+            name="file"
+            className="text-xs mb-12 hover:cursor-pointer"
+          />
           <input
             type="submit"
             value="Add PDF"
@@ -52,3 +75,7 @@ const AddPdfModal = (handleCloseModal) => {
 };
 
 export default AddPdfModal;
+
+AddPdfModal.propTypes = {
+  handleCloseModal: PropTypes.func.isRequired,
+};

@@ -13,7 +13,7 @@ const Login = () => {
 
     const success = await authService.login(email, password);
     console.log("Resultado del fetch ", success);
-    if (success) navigate("/chat-bot");
+    if (success) navigate("/");
     else alert("Usuario o contraseña incorrectos");
   };
 
