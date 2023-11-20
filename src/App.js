@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/chat-bot" element={<ChatBot />} />
+        <Route path="/" element={<ChatBot />} />
       </Routes>
     </div>
   );

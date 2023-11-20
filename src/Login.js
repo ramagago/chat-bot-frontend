@@ -13,7 +13,7 @@ const Login = () => {
 
     const success = await authService.login(email, password);
     console.log("Resultado del fetch ", success);
-    if (success) navigate("/chat-bot");
+    if (success) navigate("/");
     else alert("Usuario o contraseña incorrectos");
   };
 
@@ -41,7 +41,7 @@ const Login = () => {
             value="Log in"
             className="px-5 py-2 rounded-md bg-slate-600 text-white"
           />
-        </div>{" "}
+        </div>
       </form>
     </div>
   );
